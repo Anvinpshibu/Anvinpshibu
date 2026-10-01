@@ -1,7 +1,8 @@
-<a href="https://anvinpshibu.com"><picture><source media="(prefers-color-scheme: light)" srcset="assets/light/hero.svg"><img src="assets/hero.svg" width="100%" alt="ANVIN P SHIBU — SI engineer · ML · AI"/></picture></a>
+<a href="https://youtu.be/2kDdwyDVW64"><picture><source media="(prefers-color-scheme: light)" srcset="assets/light/hero.svg"><img src="assets/hero.svg" width="100%" alt="ANVIN P SHIBU — SI engineer · ML · AI"/></picture></a>
 
 <p align="center">
-  <a href="https://anvinpshibu.com"><img src="https://img.shields.io/badge/▶_WATCH_THE_FILM-anvinpshibu.com-FF4D12?style=for-the-badge&labelColor=0A0A0B" alt="anvinpshibu.com"/></a>
+  <a href="https://youtu.be/2kDdwyDVW64"><img src="https://img.shields.io/badge/▶_WATCH_THE_FILM-YouTube-FF4D12?style=for-the-badge&labelColor=0A0A0B&logo=youtube&logoColor=FF4D12" alt="Watch the film on YouTube"/></a>
+  <a href="https://anvinpshibu.com"><img src="https://img.shields.io/badge/SITE-anvinpshibu.com-EEE9DF?style=for-the-badge&labelColor=0A0A0B" alt="anvinpshibu.com"/></a>
   <a href="https://linkedin.com/in/anvin141"><img src="https://img.shields.io/badge/LinkedIn-anvin141-EEE9DF?style=for-the-badge&labelColor=0A0A0B&logo=linkedin&logoColor=EEE9DF" alt="LinkedIn"/></a>
   <a href="mailto:anvinpshibu@gmail.com"><img src="https://img.shields.io/badge/Mail-anvinpshibu@gmail.com-EEE9DF?style=for-the-badge&labelColor=0A0A0B&logo=gmail&logoColor=EEE9DF" alt="Email"/></a>
   <a href="https://www.npmjs.com/package/specter-kit"><img src="https://img.shields.io/badge/npm-specter--kit-EEE9DF?style=for-the-badge&labelColor=0A0A0B&logo=npm&logoColor=FF4D12" alt="npm specter-kit"/></a>
