@@ -13,7 +13,7 @@ import random
 import urllib.request
 
 from common import (ASH, BONE, EMBER, GRAPHITE, HOT, INK, LINE, MONO, MONO_M, SIGNAL,
-                    crop_marks, grid, num, spark, svg)
+                    crop_marks, grid, light, num, spark, svg)
 
 LEVELS = {"NONE": 0, "FIRST_QUARTILE": 1, "SECOND_QUARTILE": 2, "THIRD_QUARTILE": 3, "FOURTH_QUARTILE": 4}
 FILL = ["#161618", "#4A1A0C", "#8A2A0D", "#D23C10", SIGNAL]
@@ -177,6 +177,8 @@ def main():
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     with open(a.out, "w", encoding="utf-8") as f:
         f.write(out)
+    with open(a.out.replace(".svg", "-light.svg"), "w", encoding="utf-8") as f:
+        f.write(light(out))
     print(f"{a.out}: {total} contributions, {len(out) / 1024:.0f} KB")
 
 

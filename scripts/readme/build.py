@@ -8,7 +8,7 @@ import random
 from pathlib import Path
 
 from common import (ASH, BLOOD, BONE, DISPLAY, EMBER, GRAPHITE, HOT, INK, INK2, LINE, MONO,
-                    MONO_M, SANS, SERIF, SIGNAL, crop_marks, grid, num, spark, svg, wrap)
+                    MONO_M, SANS, SERIF, SIGNAL, crop_marks, grid, light, num, spark, svg, wrap)
 
 OUT = Path(__file__).resolve().parents[2] / "assets"
 PI = math.pi
@@ -187,14 +187,7 @@ def plate(num_, chapter, title, lede, lyric, i):
     body.append(f'<g>{spark(0, 0, 13)}<animateMotion path="M44 {y}H{W - 44}" keyPoints="0;0;1;1" keyTimes="{kt(0, .2, 2.2, T, T=T)}" '
                 f'calcMode="linear" dur="{T}s" repeatCount="indefinite"/>'
                 f'<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="{kt(0, .2, 8.2, 8.6, T, T=T)}" dur="{T}s" repeatCount="indefinite"/></g>')
-    # a scanning laser, sweeping the plate
-    body.append(f'<g opacity=".55"><rect x="-6" y="8" width="3" height="{H - 16}" fill="{SIGNAL}" filter="url(#glow)"/>'
-                f'<rect x="-40" y="8" width="40" height="{H - 16}" fill="url(#trail)"/>'
-                f'<animateTransform attributeName="transform" type="translate" values="0 0;{W + 50} 0" dur="{T}s" '
-                f'begin="{2.4 + i * 0.35}s" repeatCount="indefinite"/></g>')
-    trail = (f'<linearGradient id="trail"><stop offset="0" stop-color="{SIGNAL}" stop-opacity="0"/>'
-             f'<stop offset="1" stop-color="{SIGNAL}" stop-opacity=".35"/></linearGradient>')
-    return svg(W, H, "".join(body), f"{num_} · {title}", trail)
+    return svg(W, H, "".join(body), f"{num_} · {title}")
 
 
 # ── TRAINING RUN: experience as a loss curve ─────────────────────────────────────────────────
@@ -337,15 +330,7 @@ def card(pn, name, sub, metric, mlabel, desc, stack, i):
         body.append(f'<rect x="{num(x)}" y="{H - 48}" width="{num(w)}" height="24" rx="3" fill="{INK2}" stroke="#34312E"/>')
         body.append(MONO.text(s, x + 9, H - 32, 11, BONE))
         x += w + 8
-    # a laser sweeps the card, top to bottom
-    body.append(f'<g opacity="0"><rect x="8" y="-2" width="{W - 16}" height="2" fill="{SIGNAL}" filter="url(#glow)"/>'
-                f'<rect x="8" y="-34" width="{W - 16}" height="32" fill="url(#sweep)"/>'
-                f'<animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 {H}" keyTimes="0;.55;1" dur="{T}s" '
-                f'begin="{i * 0.6}s" repeatCount="indefinite"/>'
-                f'<animate attributeName="opacity" values="0;0;.8;.8;0" keyTimes="0;.55;.6;.95;1" dur="{T}s" begin="{i * 0.6}s" repeatCount="indefinite"/></g>')
-    sweep = (f'<linearGradient id="sweep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{SIGNAL}" stop-opacity="0"/>'
-             f'<stop offset="1" stop-color="{SIGNAL}" stop-opacity=".22"/></linearGradient>')
-    return svg(W, H, "".join(body), f"{name} — {sub}", sweep)
+    return svg(W, H, "".join(body), f"{name} — {sub}")
 
 
 # ── END CARD ─────────────────────────────────────────────────────────────────────────────────
@@ -380,7 +365,7 @@ def endcard():
 
 
 def main():
-    OUT.mkdir(exist_ok=True)
+    (OUT / "light").mkdir(parents=True, exist_ok=True)
     files = {"hero.svg": hero(), "training-run.svg": training_run(), "endcard.svg": endcard()}
     for i, p in enumerate(PLATES):
         files[f"plate-{p[0]}.svg"] = plate(*p, i)
@@ -388,6 +373,7 @@ def main():
         files[f"card-{p[1].lower()}.svg"] = card(*p, i)
     for f, s in files.items():
         (OUT / f).write_text(s, encoding="utf-8")
+        (OUT / "light" / f).write_text(light(s), encoding="utf-8")
         print(f"{f:24s} {len(s) / 1024:6.1f} KB")
 
 

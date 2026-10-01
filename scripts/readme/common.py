@@ -4,6 +4,7 @@ GitHub serves README images through a proxy that blocks web fonts, so every word
 converted to outlines from the same fonts anvinpshibu.com uses (Archivo, IBM Plex Mono,
 Cormorant). All fonts are SIL OFL.
 """
+import re
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -25,6 +26,27 @@ SIGNAL = "#FF4D12"
 EMBER = "#FF8A3D"
 BLOOD = "#C21D0B"
 HOT = "#FFE2C4"
+
+
+# Light mode: the same plates printed on white paper. Signal and its hot tones stay as they are.
+LIGHT = {
+    "#0A0A0B": "#FFFFFF",  # ink paper -> white
+    "#151517": "#F4F1EB",  # raised panels
+    "#121214": "#F5F3EF", "#141416": "#F5F3EF",  # grid
+    "#1C1B1A": "#E6E1D8", "#2A2826": "#E2DDD4",  # rules
+    "#2E2B28": "#D8D2C7", "#34312E": "#D8D2C7", "#3A3835": "#D8D2C7", "#26231F": "#EDE8E0",
+    "#5E5B57": "#A8A29A",  # graphite
+    "#9C978F": "#6E6962",  # ash
+    "#B9B3A8": "#57534D", "#CFC9BE": "#2E2B28",
+    "#EEE9DF": "#0A0A0B",  # bone type -> ink type
+    "#161618": "#EEEBE5",  # empty contribution square
+    "#4A1A0C": "#FFD3BF", "#8A2A0D": "#FFA47E", "#D23C10": "#FF7440",
+    "#211210": "#2A1A14",  # burnt square, charred
+}
+
+
+def light(svg_text: str) -> str:
+    return re.sub(r"#[0-9A-Fa-f]{6}\b", lambda m: LIGHT.get(m.group(0).upper(), m.group(0)), svg_text)
 
 
 def num(v: float) -> str:
